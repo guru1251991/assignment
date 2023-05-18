@@ -1,0 +1,96 @@
+{
+ "actions": [],
+ "autoname": "SRT-.#####",
+ "creation": "2023-05-17 18:11:08.853093",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_record_id",
+  "reservation_date_and_time",
+  "reserved_by",
+  "warehouse",
+  "so_no",
+  "item_no",
+  "item_name",
+  "quantity_reserved",
+  "reservation_status"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_record_id",
+   "fieldtype": "Data",
+   "label": "Item Record ID"
+  },
+  {
+   "fieldname": "reservation_date_and_time",
+   "fieldtype": "Datetime",
+   "label": "Reservation Date and Time"
+  },
+  {
+   "fieldname": "reserved_by",
+   "fieldtype": "Link",
+   "label": "Reserved By",
+   "options": "User"
+  },
+  {
+   "fieldname": "so_no",
+   "fieldtype": "Link",
+   "label": "SO No",
+   "options": "Sales Order"
+  },
+  {
+   "fieldname": "item_no",
+   "fieldtype": "Link",
+   "label": "Item No",
+   "options": "Item"
+  },
+  {
+   "fieldname": "quantity_reserved",
+   "fieldtype": "Float",
+   "label": "Quantity Reserved"
+  },
+  {
+   "fieldname": "reservation_status",
+   "fieldtype": "Select",
+   "label": "Reservation Status",
+   "options": "Reserved\nReleased\nShipped"
+  },
+  {
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item Name"
+  },
+  {
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "label": "warehouse",
+   "options": "Warehouse"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-05-18 11:07:22.288444",
+ "modified_by": "Administrator",
+ "module": "Auriga Test",
+ "name": "Test Sales Reservation",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1,
+ "track_seen": 1
+}
