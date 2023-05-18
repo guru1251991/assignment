@@ -81,7 +81,7 @@ frappe.ui.form.on('Sales Order', {
                 d.set_primary_action(__('Add'), function() {
                     var dialog_data = d.get_values()
                         frappe.call({
-                            method: "custom_app.custom_app.custom.sales_order.sales_reservation",
+                            method: "auriga_test.auriga_test.custom.sales_order.sales_reservation",
                             args: {
                                 data:dialog_data.reserved_qty_details,
                             },
