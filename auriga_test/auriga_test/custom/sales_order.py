@@ -6,6 +6,25 @@ from frappe.utils import now
 def sales_reservation(data):
 	data = json.loads(data)
 	cnt =0
+	# check incorrect qty
+	is_incorrect_qty = 0
+	errmsg = f'''
+				Please check below items qty should not be grater than qty entered in Item table
+			'''
+	for row in data:
+		item = row.get("item_code")
+		qty_to_be_reserved = row.get("reserved_qty")
+
+		# check enterred qty is grater than so qty or not
+		so_qty = frappe.db.get_value("Sales Order Item",row.get("items_name"),'qty')
+		if qty_to_be_reserved > so_qty:
+			is_incorrect_qty += 1
+			errmsg += f'''
+						<br><b>{item}
+				'''
+	if is_incorrect_qty:
+		frappe.throw(errmsg)
+
 	msg = f'''
 				<table border ='1'>
 					<tr>
@@ -24,10 +43,8 @@ def sales_reservation(data):
 		qty_to_be_reserved = row.get("reserved_qty")
 		reserved_qty = get_actual_reserved_qty(item,warehouse)
 
-
 		# this actual_qty qty means qty which is available for sale i.e stock qty in warehouse
 		total_available_qty = row.get("actual_qty")
-
 		free_for_reserve = total_available_qty - reserved_qty
 		if qty_to_be_reserved > free_for_reserve:
 			free_for_reserve = 0 if free_for_reserve < 0 else free_for_reserve
@@ -46,6 +63,7 @@ def sales_reservation(data):
 		msg += '''</table> '''
 		frappe.throw(msg)
 
+@frappe.whitelist()
 def get_actual_reserved_qty(item,warehouse):
 	query = """ 
 		SELECT 
@@ -69,6 +87,5 @@ def make_reservation(item,warehouse,row):
 	srt_doc.so_no = row.get("sales_order")
 	srt_doc.reservation_status = "Reserved"
 	srt_doc.warehouse = row.get("warehouse")
-	
 	srt_doc.save(ignore_permissions=True)
 	frappe.db.commit()
