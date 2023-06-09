@@ -32,6 +32,7 @@ app_license = "MIT"
 
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {"Item" : "public/js/item.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -100,9 +101,14 @@ app_license = "MIT"
 #		"on_update": "method",
 #		"on_cancel": "method",
 #		"on_trash": "method"
-#	}
+# 	}
 # }
 
+doc_events = {
+	"Item": {
+		"before_save": "auriga_test.auriga_test.docevents.item.update_conversion_factor"
+	}
+}
 # Scheduled Tasks
 # ---------------
 
@@ -135,7 +141,7 @@ app_license = "MIT"
 # override_whitelisted_methods = {
 #	"frappe.desk.doctype.event.event.get_events": "auriga_test.event.get_events"
 # }
-#
+# 
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
 # along with any modifications made in other Frappe apps
